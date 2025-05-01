@@ -41,8 +41,8 @@ export default function DashboardPage () {
     }
 
     return (
-        <div className="max-w-xl mx-auto mt-10 space-y-4">
-            <h1 className="text-2xl font-bold">📡 Connected RPC</h1>
+        <div className="p-6">
+            <h1 className="text-xl font-semibold mb-4">📡 Connected RPC</h1>
             <ul className="list-disc pl-5 space-y-1 text-sm">
                 <li><strong>Chain:</strong> {info.chain}</li>
                 <li><strong>Node:</strong> {info.nodeName}</li>
