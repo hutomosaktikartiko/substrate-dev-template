@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { PolkadotProvider } from "@/components/providers/polkadot-provider";
 import { WalletProvider } from "@/components/providers/wallet-provider";
+import { Toaster } from "sonner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -43,6 +44,7 @@ export default function RootLayout ({
             </WalletProvider>
           </PolkadotProvider>
         </ThemeProvider>
+        <Toaster />
       </body>
     </html>
   );
