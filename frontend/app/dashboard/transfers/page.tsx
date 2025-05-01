@@ -83,26 +83,28 @@ export default function TransferPage () {
             <h1 className="text-2xl font-bold">Transfer Funds</h1>
 
             <div className="space-y-4">
-                <Label>From Account</Label>
-                <Select
-                    value={selectedAccountAddress}
-                    onValueChange={setSelectedAccountAddress}
-                >
-                    <SelectTrigger className="w-full dark:bg-gray-800 dark:text-white">
-                        <SelectValue placeholder="Select From Account" />
-                    </SelectTrigger>
-                    <SelectContent>
-                        {accounts.map((account) => (
-                            <SelectItem key={account.address} value={account.address}>
-                                {account.meta.name} - {account.address}
-                            </SelectItem>
-                        ))}
-                    </SelectContent>
-                </Select>
-                <p
-                    data-slot="form-description"
-                    className="text-muted-foreground text-sm"
-                >Balance {balance} DOT</p>
+                <div className="space-y-2">
+                    <Label>From Account</Label>
+                    <Select
+                        value={selectedAccountAddress}
+                        onValueChange={setSelectedAccountAddress}
+                    >
+                        <SelectTrigger className="w-full">
+                            <SelectValue placeholder="Select From Account" />
+                        </SelectTrigger>
+                        <SelectContent>
+                            {accounts.map((account) => (
+                                <SelectItem key={account.address} value={account.address}>
+                                    {account.meta.name} - {account.address}
+                                </SelectItem>
+                            ))}
+                        </SelectContent>
+                    </Select>
+                    <p
+                        data-slot="form-description"
+                        className="text-muted-foreground text-sm"
+                    >Balance {balance} DOT</p>
+                </div>
 
                 <div className="space-y-2">
                     <Label>To Account</Label>

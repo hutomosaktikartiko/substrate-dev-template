@@ -45,10 +45,10 @@ export default function ChainStatePage () {
             <h1 className="text-xl font-semibold mb-4">🔍 Query Chain State</h1>
 
             <div className="space-y-4">
-                <div>
+                <div className="space-y-2">
                     <Label htmlFor="pallet">Pallet</Label>
                     <Select onValueChange={setSelectedPallet}>
-                        <SelectTrigger className="w-[300px]">
+                        <SelectTrigger className="w-full">
                             <SelectValue placeholder="Select pallet" />
                         </SelectTrigger>
                         <SelectContent>
@@ -61,10 +61,10 @@ export default function ChainStatePage () {
                     </Select>
                 </div>
 
-                <div>
+                <div className="space-y-2">
                     <Label htmlFor="method">Method</Label>
                     <Select onValueChange={setSelectedMethod} disabled={!selectedPallet}>
-                        <SelectTrigger className="w-[300px]">
+                        <SelectTrigger className="w-full">
                             <SelectValue placeholder="Select method" />
                         </SelectTrigger>
                         <SelectContent>

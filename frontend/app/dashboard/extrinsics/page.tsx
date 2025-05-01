@@ -78,10 +78,10 @@ export default function SubmitExtrinsicPage () {
             <h1 className="text-xl font-semibold">📤 Submit Extrinsic</h1>
 
             <div className="space-y-4">
-                <div>
+                <div className="space-y-2">
                     <Label>Pallet</Label>
                     <Select onValueChange={setSelectedPallet}>
-                        <SelectTrigger>
+                        <SelectTrigger className="w-full">
                             <SelectValue placeholder="Select Pallet" />
                         </SelectTrigger>
                         <SelectContent>
@@ -92,10 +92,10 @@ export default function SubmitExtrinsicPage () {
                     </Select>
                 </div>
 
-                <div>
+                <div className="space-y-2">
                     <Label>Method</Label>
                     <Select onValueChange={setSelectedMethod}>
-                        <SelectTrigger>
+                        <SelectTrigger className="w-full">
                             <SelectValue placeholder="Select Method" />
                         </SelectTrigger>
                         <SelectContent>
@@ -141,11 +141,10 @@ export default function SubmitExtrinsicPage () {
                 <Button onClick={handleSubmit}>Submit Extrinsic</Button>
 
                 {result && (
-                    <Textarea
-                        value={result}
-                        readOnly
-                        className="bg-muted text-muted-foreground border border-border whitespace-pre-wrap"
-                    />
+                    <div className="mt-4 text-sm text-gray-700">
+                        <strong>Status: </strong>
+                        {result}
+                    </div>
                 )}
             </div>
         </div>
