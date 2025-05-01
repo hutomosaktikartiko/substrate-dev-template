@@ -34,22 +34,70 @@ A Polkadot SDK based project such as this one consists of:
 
 ## Getting Started
 
+### Parachain
+
 #### Install [Pop CLI](https://github.com/r0gue-io/pop-cli) - the all-in-one Polkadot development tool:
 > Detailed installation instructions can be found [here](https://learn.onpop.io/v/cli/installing-pop-cli).
-```
+
+```bash
 cargo install --force --locked pop-cli
 ```
 
-#### Start a new parachain project with this template:
-```
-pop new parachain
+#### Install Zombienet
+Zombienet is a testing framework for parachains. Install it using the following command:
+
+```bash
+cargo install --locked zombienet
 ```
 
-#### Learn how to run your parachain using the `pop up` command:
-```sh
-pop up parachain -f ./network.toml
+#### Set Up Local Provider
+Set up the local provider for your parachain using Zombienet:
+
+```bash
+zombienet setup polkadot polkadot-parachain
 ```
-> 👉 https://learn.onpop.io/v/appchains/guides/running-your-parachain
+
+#### Running Parachain
+Run your parachain locally with the following command:
+
+```bash
+zombienet spawn network.toml
+```
+
+### Frontend
+
+#### Navigate to the Frontend Folder
+Move into the frontend directory:
+
+```bash
+cd frontend
+```
+
+#### Install Node.js
+Ensure you have Node.js installed. You can download it from [Node.js official website](https://nodejs.org/).
+
+#### Install PNPM
+Install PNPM, a fast and efficient package manager:
+
+```bash
+npm install -g pnpm
+```
+
+#### Install Dependencies
+Install the required dependencies for the frontend:
+
+```bash
+pnpm install
+```
+
+#### Running Frontend
+Start the frontend development server:
+
+```bash
+pnpm dev
+```
+
+You can now access the frontend in your browser at the provided local development URL.
 
 ### Learning Resources
 
