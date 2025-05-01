@@ -1,14 +1,16 @@
 "use client"
 
-import { usePolkadot } from "@/components/providers/polkadot-provider"
-import Link from "next/link"
+import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
-import { useState } from "react"
-import { useEffect } from "react"
+import { usePolkadot } from "@/components/providers/polkadot-provider"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
 export default function ConnectPage () {
     const { isConnected, rpcUrl, setRpcUrl } = usePolkadot()
-    const [urlInput, setUrlInput] = useState(rpcUrl)
+    const [urlInput, setUrlInput] = useState(rpcUrl || "")
     const router = useRouter()
 
     useEffect(() => {
@@ -23,27 +25,29 @@ export default function ConnectPage () {
     }
 
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen">
-            <h1 className="text-2xl font-bold mb-4">Connect to your Polkadot Node</h1>
-            <form onSubmit={handleSubmit} className="space-y-4">
-                <div>
-                    <label className="block text-sm font-medium mb-1">RPC WebSocket URL</label>
-                    <input
-                        type="text"
-                        value={urlInput}
-                        onChange={(e) => setUrlInput(e.target.value)}
-                        className="w-full px-3 py-2 border rounded"
-                        placeholder="wss://rpc.polkadot.io"
-                    />
-                </div>
-                <button
-                    type="submit"
-                    className="w-full bg-full-600 text-white py-2 px-4 rounded hover:bg-blue-700"
-                >
-                    Connect
-                </button>
-            </form>
-            {!isConnected && <p className="text-sm mt-3 text-gray-600">Waiting for connection...</p>}
+        <div className="flex items-center justify-center min-h-screen bg-muted">
+            <Card className="w-full max-w-md p-6">
+                <CardHeader>
+                    <CardTitle>Connect to Polkadot RPC</CardTitle>
+                </CardHeader>
+                <CardContent>
+                    <form onSubmit={handleSubmit} className="space-y-4">
+                        <div className="space-y-2">
+                            <Label htmlFor="rpc-url">RPC WebSocket URL</Label>
+                            <Input
+                                id="rpc-url"
+                                value={urlInput}
+                                onChange={(e) => setUrlInput(e.target.value)}
+                                placeholder="wss://rpc.polkadot.io"
+                                required
+                            />
+                        </div>
+                        <Button type="submit" className="w-full">
+                            Connect
+                        </Button>
+                    </form>
+                </CardContent>
+            </Card>
         </div>
     )
 }

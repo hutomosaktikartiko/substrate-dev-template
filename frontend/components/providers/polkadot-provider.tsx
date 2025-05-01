@@ -2,7 +2,6 @@
 
 import React, { createContext, useContext, useEffect, useState } from "react"
 import { ApiPromise, WsProvider } from "@polkadot/api"
-import { Router } from "lucide-react"
 import { useRouter } from "next/navigation"
 
 type PolkadotContextType = {

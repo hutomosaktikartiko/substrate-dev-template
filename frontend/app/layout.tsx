@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { PolkadotProvider } from "@/components/providers/polkadot-provider";
+import { WalletProvider } from "@/components/providers/wallet-provider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -24,6 +25,7 @@ export default function RootLayout ({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   return (
     <html lang="en">
       <body
@@ -36,7 +38,9 @@ export default function RootLayout ({
           disableTransitionOnChange
         >
           <PolkadotProvider>
-            {children}
+            <WalletProvider>
+              {children}
+            </WalletProvider>
           </PolkadotProvider>
         </ThemeProvider>
       </body>

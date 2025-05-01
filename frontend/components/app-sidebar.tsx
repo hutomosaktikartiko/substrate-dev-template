@@ -20,13 +20,9 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
+import { useWallet } from "./providers/wallet-provider"
 
 const data = {
-  // TODO: replace with actual active wallet
-  user: {
-    name: "shadcn",
-    address: "5FZWMzcUbfNGtY7bDwhaK1tBHo2T9gxiaFLTHqoCr9wrg61r",
-  },
   navMain: [
     {
       title: "Dashboard",
@@ -52,6 +48,8 @@ const data = {
 }
 
 export function AppSidebar ({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const { selectedAccount } = useWallet()
+
   return (
     <Sidebar collapsible="offcanvas" {...props}>
       <SidebarHeader>
@@ -72,9 +70,11 @@ export function AppSidebar ({ ...props }: React.ComponentProps<typeof Sidebar>) 
       <SidebarContent>
         <NavMain items={data.navMain} />
       </SidebarContent>
-      <SidebarFooter>
-        <NavUser user={data.user} />
-      </SidebarFooter>
+      {selectedAccount && (
+        <SidebarFooter>
+          <NavUser />
+        </SidebarFooter>
+      )}
     </Sidebar>
   )
 }

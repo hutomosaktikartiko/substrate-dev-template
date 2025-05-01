@@ -25,16 +25,11 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar"
+import { useWallet } from "./providers/wallet-provider"
 
-export function NavUser ({
-  user,
-}: {
-  user: {
-    name: string
-    address: string
-  }
-}) {
+export function NavUser () {
   const { isMobile } = useSidebar()
+  const { accounts, selectedAccount } = useWallet()
 
   return (
     <SidebarMenu>
@@ -46,13 +41,13 @@ export function NavUser ({
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
             >
               <Avatar className="h-8 w-8 rounded-lg grayscale">
-                <AvatarImage src="/avatars/shadcn.jpg" alt={user.name} />
+                <AvatarImage src="/avatars/shadcn.jpg" />
                 <AvatarFallback className="rounded-lg">CN</AvatarFallback>
               </Avatar>
               <div className="grid flex-1 text-left text-sm leading-tight">
-                <span className="truncate font-medium">{user.name}</span>
+                <span className="truncate font-medium">{selectedAccount?.meta.name ?? "-"}</span>
                 <span className="text-muted-foreground truncate text-xs">
-                  {user.address}
+                  {selectedAccount?.address ?? "Wallet not connected"}
                 </span>
               </div>
               <IconDotsVertical className="ml-auto size-4" />
@@ -65,11 +60,15 @@ export function NavUser ({
             sideOffset={4}
           >
             <DropdownMenuGroup>
-              {/* TODO: replace with actual connected wallets */}
-              <DropdownMenuItem>
-                <IconUserCircle />
-                5FZWMzcUbfNGtY7bDwhaK1tBHo2T9gxiaFLTHqoCr9wrg61r
-              </DropdownMenuItem>
+              {accounts.map((account) => {
+                const isActive = account.address === selectedAccount?.address
+
+                return (
+                  <DropdownMenuItem>
+                    {account.address ?? ""}
+                  </DropdownMenuItem>
+                )
+              })}
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuItem>

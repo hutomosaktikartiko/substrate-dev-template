@@ -1,57 +1,7 @@
-"use client"
-
-import { AppSidebar } from "@/components/app-sidebar"
-import { usePolkadot } from "@/components/providers/polkadot-provider"
-import { SiteHeader } from "@/components/site-header"
-import {
-    SidebarInset,
-    SidebarProvider,
-} from "@/components/ui/sidebar"
-import { useRouter } from "next/navigation"
-import { useEffect } from "react"
+import { ClientLayoutGuard } from "@/app/dashboard/client-layout-guard";
 
 export default function DashboardLayout ({ children }: { children: React.ReactNode }) {
-    // // Cek apakah ada token autentikasi (misal, di cookies)
-    // const token = cookies().get("auth_token")?.value
-
-    // // Jika tidak ada token, redirect ke halaman login
-    // if (!token) {
-    //     redirect("/auth/login")
-    // }
-
-    const { isConnected } = usePolkadot()
-    const router = useRouter()
-
-    useEffect(() => {
-        if (!isConnected) {
-            router.replace("/connect")
-        }
-    }, [isConnected, router])
-
-    if (!isConnected) {
-        return <div className="p-4">Connection to Polkadot...</div>
-    }
-
     return (
-        <SidebarProvider
-            style={{
-                "--sidebar-width": "calc(var(--spacing) * 72)",
-                "--header-height": "calc(var(--spacing) * 12)",
-            } as React.CSSProperties}
-        >
-            <AppSidebar variant="inset" />
-
-            <SidebarInset>
-                <SiteHeader />
-
-                <div className="flex flex-1 flex-col">
-                    <div className="@container/main flex flex-1 flex-col gap-2">
-                        <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
-                            {children}
-                        </div>
-                    </div>
-                </div>
-            </SidebarInset>
-        </SidebarProvider>
+        <ClientLayoutGuard>{children}</ClientLayoutGuard>
     )
 }

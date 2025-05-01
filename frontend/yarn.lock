@@ -397,6 +397,29 @@
     rxjs "^7.8.1"
     tslib "^2.8.1"
 
+"@polkadot/extension-dapp@^0.58.8":
+  version "0.58.8"
+  resolved "https://registry.yarnpkg.com/@polkadot/extension-dapp/-/extension-dapp-0.58.8.tgz#baa9b854d15d6a133c19bd268b37f7c89c1cc0fc"
+  integrity sha512-FfBxxs9/+kJvawdsa8xAM1eOSbIqlrFo1rr2moQQa0Ffv3KNHRwNauWqrjPwKZKN32iLNicmVdfiu+qt4il3XA==
+  dependencies:
+    "@polkadot/extension-inject" "0.58.8"
+    "@polkadot/util" "^13.4.4"
+    "@polkadot/util-crypto" "^13.4.4"
+    tslib "^2.8.1"
+
+"@polkadot/extension-inject@0.58.8":
+  version "0.58.8"
+  resolved "https://registry.yarnpkg.com/@polkadot/extension-inject/-/extension-inject-0.58.8.tgz#c02245c31d1fe20b51684097243e5fbd011e4aee"
+  integrity sha512-p2/w5CKAJwaPRJXMvUbFnNZoBBUNQYF1cm7FvUh83gwHqjIgVx3mln0dm9a6gvWeJP0GfHC2TDQVHOu22VtB4g==
+  dependencies:
+    "@polkadot/api" "^15.9.2"
+    "@polkadot/rpc-provider" "^15.9.2"
+    "@polkadot/types" "^15.9.2"
+    "@polkadot/util" "^13.4.4"
+    "@polkadot/util-crypto" "^13.4.4"
+    "@polkadot/x-global" "^13.4.4"
+    tslib "^2.8.1"
+
 "@polkadot/keyring@^13.4.4":
   version "13.4.4"
   resolved "https://registry.yarnpkg.com/@polkadot/keyring/-/keyring-13.4.4.tgz#9a24ea3f2b5b554567d251ab734bf9db67baceaf"
@@ -438,7 +461,7 @@
     rxjs "^7.8.1"
     tslib "^2.8.1"
 
-"@polkadot/rpc-provider@15.9.2":
+"@polkadot/rpc-provider@15.9.2", "@polkadot/rpc-provider@^15.9.2":
   version "15.9.2"
   resolved "https://registry.yarnpkg.com/@polkadot/rpc-provider/-/rpc-provider-15.9.2.tgz#a221181a5961da888fb8f864b5ee8cef2916e3f1"
   integrity sha512-yKakGPz+x1GDqWi2sI6KrAApIYEya6LvUetQ/00d85vK49x8dyy9tHyVmF6abakIOf/eJ16sYgLQj8K6tlbnyg==
@@ -506,7 +529,7 @@
     "@polkadot/util" "^13.4.4"
     tslib "^2.8.1"
 
-"@polkadot/types@15.9.2":
+"@polkadot/types@15.9.2", "@polkadot/types@^15.9.2":
   version "15.9.2"
   resolved "https://registry.yarnpkg.com/@polkadot/types/-/types-15.9.2.tgz#767b7c4c84079da82f019589ed1a8672b2b788c5"
   integrity sha512-8Xv1t1SeT1r00vRCbYEUCAkFxh34zHPlQQXXeuMqoLTaBEldsrMohm5oYZTOKfIemBZGjraNBAVmXv9NMsrRrQ==
