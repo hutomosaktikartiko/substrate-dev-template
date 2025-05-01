@@ -2,12 +2,15 @@
 
 import React, { createContext, useContext, useEffect, useState } from "react"
 import { ApiPromise, WsProvider } from "@polkadot/api"
+import { Router } from "lucide-react"
+import { useRouter } from "next/navigation"
 
 type PolkadotContextType = {
     api: ApiPromise | null
     isConnected: boolean,
     rpcUrl: string,
-    setRpcUrl: (url: string) => void
+    setRpcUrl: (url: string) => void,
+    disconnect: () => void
 }
 
 const PolkadotContext = createContext<PolkadotContextType>({
@@ -15,6 +18,7 @@ const PolkadotContext = createContext<PolkadotContextType>({
     isConnected: false,
     rpcUrl: "",
     setRpcUrl: () => { },
+    disconnect: () => { },
 })
 
 export function PolkadotProvider ({ children }: { children: React.ReactNode }) {
@@ -27,6 +31,7 @@ export function PolkadotProvider ({ children }: { children: React.ReactNode }) {
 
         return ""
     })
+    const router = useRouter()
 
     useEffect(() => {
         const connect = async () => {
@@ -52,9 +57,19 @@ export function PolkadotProvider ({ children }: { children: React.ReactNode }) {
         setApi(null)
     }
 
+    const handleDisconnect = () => {
+        if (api) {
+            api.disconnect()
+        }
+        setApi(null)
+        setIsConnected(false)
+        localStorage.removeItem("polkadotRpcUrl")
+        router.push("/connect")
+    }
+
     return (
         <PolkadotContext.Provider
-            value={{ api, isConnected, rpcUrl, setRpcUrl: handleSetRpcUrl }}
+            value={{ api, isConnected, rpcUrl, setRpcUrl: handleSetRpcUrl, disconnect: handleDisconnect }}
         >
             {children}
         </PolkadotContext.Provider>
