@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/providers/theme-provider";
+import { PolkadotProvider } from "@/components/providers/polkadot-provider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,7 +35,9 @@ export default function RootLayout ({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <PolkadotProvider>
+            {children}
+          </PolkadotProvider>
         </ThemeProvider>
       </body>
     </html>

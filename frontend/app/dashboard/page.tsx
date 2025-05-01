@@ -1,20 +1,54 @@
-import { ChartAreaInteractive } from "@/components/chart-area-interactive"
-import { SectionCards } from "@/components/section-cards"
+"use client"
+
+import { usePolkadot } from "@/components/providers/polkadot-provider"
+import { useEffect, useState } from "react"
 
 export default function DashboardPage () {
-    return (
-        <div className="flex flex-1 flex-col">
-            <div className="@container/main flex flex-1 flex-col gap-2">
-                <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
-                    {/* Section Cards */}
-                    <SectionCards />
+    const { api, isConnected } = usePolkadot()
+    const [info, setInfo] = useState<{
+        chain?: string
+        nodeName?: string
+        nodeVersion?: string
+        genesisHash?: string
+    }>({})
 
-                    {/* Grafik atau chart */}
-                    <div className="px-4 lg:px-6">
-                        <ChartAreaInteractive />
-                    </div>
-                </div>
-            </div>
+    useEffect(() => {
+        if (!api || !isConnected) return
+
+        const fetchInfo = async () => {
+            try {
+                const chain = await api.rpc.system.chain()
+                const nodeName = await api.rpc.system.name()
+                const nodeVersion = await api.rpc.system.version()
+                const genesisHash = api.genesisHash.toHex()
+
+                setInfo({
+                    chain: chain.toString(),
+                    nodeName: nodeName.toString(),
+                    nodeVersion: nodeVersion.toString(),
+                    genesisHash,
+                })
+            } catch (error) {
+                console.log("Failed to fetch chain info")
+            }
+        }
+
+        fetchInfo()
+    }, [api, isConnected])
+
+    if (!isConnected) {
+        return <p>🔌RPC not connected...</p>
+    }
+
+    return (
+        <div className="max-w-xl mx-auto mt-10 space-y-4">
+            <h1 className="text-2xl font-bold">📡 Connected RPC</h1>
+            <ul className="list-disc pl-5 space-y-1 text-sm">
+                <li><strong>Chain:</strong> {info.chain}</li>
+                <li><strong>Node:</strong> {info.nodeName}</li>
+                <li><strong>Version:</strong> {info.nodeVersion}</li>
+                <li><strong>Genesis Hash:</strong> {info.genesisHash}</li>
+            </ul>
         </div>
     )
 }

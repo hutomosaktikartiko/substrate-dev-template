@@ -6,7 +6,7 @@ export default function Page () {
       <h1 className="text-4xl font-bold mb-6">Selamat datang di Aplikasi</h1>
       <p className="text-lg mb-4">Temukan data yang kamu butuhkan dengan mudah.</p>
       <div className="flex gap-4">
-        <Link href="/auth/connect" className="btn btn-primary">
+        <Link href="/connect" className="btn btn-primary">
           Connect
         </Link>
       </div>

@@ -1,11 +1,14 @@
+"use client"
+
 import { AppSidebar } from "@/components/app-sidebar"
+import { usePolkadot } from "@/components/providers/polkadot-provider"
 import { SiteHeader } from "@/components/site-header"
 import {
     SidebarInset,
     SidebarProvider,
 } from "@/components/ui/sidebar"
-import { cookies } from "next/headers"
-import { redirect } from "next/navigation"
+import { useRouter } from "next/navigation"
+import { useEffect } from "react"
 
 export default function DashboardLayout ({ children }: { children: React.ReactNode }) {
     // // Cek apakah ada token autentikasi (misal, di cookies)
@@ -15,6 +18,19 @@ export default function DashboardLayout ({ children }: { children: React.ReactNo
     // if (!token) {
     //     redirect("/auth/login")
     // }
+
+    const { isConnected } = usePolkadot()
+    const router = useRouter()
+
+    useEffect(() => {
+        if (!isConnected) {
+            router.replace("/connect")
+        }
+    }, [isConnected, router])
+
+    if (!isConnected) {
+        return <div className="p-4">Connection to Polkadot...</div>
+    }
 
     return (
         <SidebarProvider
